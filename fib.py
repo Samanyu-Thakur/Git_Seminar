@@ -1,7 +1,16 @@
-def fibonacci(n):
-    a, b = 0, 1
-    for i in range(n):
-        print(a, end=" ")
-        a, b = b, a + b
+from functools import lru_cache
 
-fibonacci(10)
+@lru_cache(maxsize=100000000)
+def fib(n):
+    if n==1:
+        return 1
+    elif n==2:
+        return 1
+    elif n > 2:
+        return fib(n-1) + fib(n-2)
+    else:
+        return 0
+    
+if __name__ == '__main__':
+    for n in range(1000000):
+        print(f"{n}: {fib(n)}")
